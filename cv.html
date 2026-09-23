@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Kiwi Carneiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Kiwi Carneiro</a>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#trabajo">Trabajo</a>
+    <a href="index.html#sobre-mi">Sobre mí</a>
+    <a href="cv.html" class="is-active">CV</a>
+    <a href="index.html#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="cv-section">
+    <div class="section-head">
+      <h2>CV</h2>
+      <span class="section-count">3 páginas</span>
+    </div>
+
+    <div class="cv-viewer">
+
+      <div class="flip-stage" id="flipStage">
+
+        <!-- Leaf 1: portada (top layer) -->
+        <div class="page-leaf leaf-cover" id="leaf1">
+          <div class="leaf-face face-cover">
+            <img src="assets/cv/cv-cover.jpg" alt="Portada del CV — Kiwi Punx, Portfolio 2026">
+          </div>
+        </div>
+
+        <!-- Leaf 2: contenido, spread de 2 páginas (middle layer) -->
+        <div class="page-leaf leaf-spread" id="leaf2">
+          <div class="leaf-face face-spread">
+            <div class="spread-page">
+              <img src="assets/cv/cv-about.jpg" alt="Hey! Hola! Hello! — Adriana Carneiro (Kiwi)">
+            </div>
+            <div class="spread-spine"></div>
+            <div class="spread-page">
+              <img src="assets/cv/cv-experience.jpg" alt="Experiencia, educación e idiomas de Kiwi Carneiro">
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 3: contraportada (bottom layer, always present) -->
+        <div class="page-leaf leaf-back">
+          <div class="leaf-face face-back">
+            <span class="leaf-mark">KC</span>
+            <p>hola@kiwipunx.com</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flip-controls">
+        <button type="button" class="flip-btn" id="prevBtn" aria-label="Página anterior">‹</button>
+        <div class="flip-dots" id="flipDots">
+          <button type="button" class="flip-dot is-active" data-index="0" aria-label="Portada"></button>
+          <button type="button" class="flip-dot" data-index="1" aria-label="Contenido"></button>
+          <button type="button" class="flip-dot" data-index="2" aria-label="Contraportada"></button>
+        </div>
+        <button type="button" class="flip-btn" id="nextBtn" aria-label="Página siguiente">›</button>
+      </div>
+
+      <p class="flip-caption" id="flipCaption">Portada</p>
+    </div>
+
+    <a href="cv-kiwi-carneiro.pdf" class="cv-download" download>Descargar CV en PDF</a>
+    <p class="cv-note">Vista previa provisional — se actualizará con el PDF final.</p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>© Kiwi Carneiro, Madrid</span>
+  <span>Diseño gráfico &amp; dirección de arte</span>
+</footer>
+
+<script>
+(function () {
+  var leaves = [document.getElementById('leaf1'), document.getElementById('leaf2')];
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.flip-dot'));
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var caption = document.getElementById('flipCaption');
+  var labels = ['Portada', 'Contenido', 'Contraportada'];
+  var current = 0;
+
+  function render() {
+    leaves.forEach(function (leaf, i) {
+      leaf.classList.toggle('is-flipped', i < current);
+    });
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('is-active', i === current);
+    });
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === labels.length - 1;
+    caption.textContent = labels[current];
+  }
+
+  prevBtn.addEventListener('click', function () {
+    if (current > 0) { current -= 1; render(); }
+  });
+  nextBtn.addEventListener('click', function () {
+    if (current < labels.length - 1) { current += 1; render(); }
+  });
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      current = parseInt(dot.getAttribute('data-index'), 10);
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
