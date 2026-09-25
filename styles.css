@@ -205,26 +205,49 @@ body {
 
 .work-caption {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 24px 20px 16px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  padding: 20px;
+  background: rgba(59, 59, 59, 0.55);
   color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
   z-index: 2;
+}
+
+.work-item:hover .work-caption,
+.work-item:focus-visible .work-caption {
+  opacity: 1;
 }
 
 .work-caption h3 {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
   font-size: 22px;
+  margin-bottom: 4px;
+  transform: translateY(8px);
+  transition: transform 0.25s ease;
 }
 
 .work-caption p {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   opacity: 0.85;
+  transform: translateY(8px);
+  transition: transform 0.25s ease;
 }
+
+.work-item:hover .work-caption h3,
+.work-item:hover .work-caption p,
+.work-item:focus-visible .work-caption h3,
+.work-item:focus-visible .work-caption p {
+  transform: translateY(0);
+}
+
 
 /* ABOUT SECTION */
 .about {
