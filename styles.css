@@ -191,61 +191,96 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
+/* Imagen con pequeño zoom */
 .work-item:hover img {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
+/* Borde */
 .work-item:hover,
 .work-item:focus-visible {
   border-color: var(--orange);
 }
 
+/* CAPTION */
 .work-caption {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 28px 20px 18px;
+
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  text-align: left;
-  padding: 20px;
-  background: rgba(59, 59, 59, 0.55);
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0)
+  );
+
   color: #fff;
+
+  /* Oculto y desplazado hacia abajo */
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transform: translateY(100%);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
   z-index: 2;
 }
 
+/* Aparece desde abajo */
 .work-item:hover .work-caption,
 .work-item:focus-visible .work-caption {
   opacity: 1;
+  transform: translateY(0);
 }
 
+/* Título */
 .work-caption h3 {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
   font-size: 22px;
-  margin-bottom: 4px;
-  transform: translateY(8px);
-  transition: transform 0.25s ease;
+  margin: 0 0 4px;
+
+  transform: translateY(15px);
+  opacity: 0;
+
+  transition:
+    transform 0.4s ease 0.1s,
+    opacity 0.3s ease 0.1s;
 }
 
+/* Descripción */
 .work-caption p {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
-  opacity: 0.85;
-  transform: translateY(8px);
-  transition: transform 0.25s ease;
+  margin: 0;
+  opacity: 0;
+
+  transform: translateY(15px);
+
+  transition:
+    transform 0.4s ease 0.16s,
+    opacity 0.3s ease 0.16s;
 }
 
+/* Texto entra ligeramente después del panel */
 .work-item:hover .work-caption h3,
 .work-item:hover .work-caption p,
 .work-item:focus-visible .work-caption h3,
 .work-item:focus-visible .work-caption p {
   transform: translateY(0);
+  opacity: 1;
 }
 
 
