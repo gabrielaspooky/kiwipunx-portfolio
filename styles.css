@@ -92,11 +92,38 @@ body {
 }
 
 .inline-img {
+  position: relative;
+  display: inline-block;
   height: clamp(60px, 10vw, 148px);
   width: clamp(60px, 10vw, 148px);
-  object-fit: cover;
   vertical-align: middle;
   border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Imagen "GIF": fotogramas apilados que se alternan con un fundido lento.
+   Para añadir más fotos, agrega otro <img class="cycle-frame"> dentro de
+   .cycle-img y reparte los animation-delay en partes iguales del total
+   (p.ej. con 3 fotos: 0s, 2s, 4s y duración total 6s). */
+.cycle-img .cycle-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: cycleFade 6s ease-in-out infinite;
+}
+
+.cycle-img .cycle-frame:nth-child(1) { animation-delay: 0s; }
+.cycle-img .cycle-frame:nth-child(2) { animation-delay: 3s; }
+
+@keyframes cycleFade {
+  0%   { opacity: 1; }
+  42%  { opacity: 1; }
+  50%  { opacity: 0; }
+  92%  { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .linea {
